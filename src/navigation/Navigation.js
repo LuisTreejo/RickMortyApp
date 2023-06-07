@@ -1,0 +1,71 @@
+import { View, Text, Image } from 'react-native'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+import React from 'react'
+import Account from '../screen/Account'
+import Favoritos from '../screen/Favoritos'
+import Rickandmorty from '../screen/Rickandmorty'
+import NavigationAccount from './NavigationAccount';
+import NavigationFavoritos from './NavigationFavoritos';
+
+
+export default function Navigation() {
+    const Tab = createBottomTabNavigator();
+  return (
+    <Tab.Navigator
+    // screenOptions={({ route }) => ({
+    //     tabBarIcon: ({ focused, color, size }) => {
+    //       let iconName;
+
+    //       if (route.name === 'Account') {
+    //         iconName = focused
+    //           ? 'person-outline'
+    //           : 'person-outline';
+    //       } else if (route.name === 'Favoritos') {
+    //         iconName = focused ? 'heart-outline' : 'heart-outline';
+    //       }
+
+          
+    //       return <Ionicons name={iconName} size={size} color={color} />;
+    //     },
+    //   })}
+    //   tabBarOptions={{
+    //     activeTintColor: 'tomato',
+    //     inactiveTintColor: 'black',
+    //   }}
+    >
+        <Tab.Screen 
+            name='Account' 
+            component={NavigationAccount}
+            options={{
+                tabBarLabel:"Mi cuenta",
+                tabBarIcon:({color,size})=>{
+                    <FontAwesome5 name="user-alt" size={size} color={color} />
+                }
+            }}
+        />
+        <Tab.Screen 
+            name='Rickandmorty' 
+            component={Rickandmorty}
+            options={{
+                tabBarLabel:"",
+                tabBarIcon: () => renderIconRM()
+            }}
+        />
+        <Tab.Screen 
+            name='Favoritos' 
+            component={NavigationFavoritos}
+        />
+    </Tab.Navigator>
+  )
+}
+
+const renderIconRM=()=>{
+    return(
+        <Image
+            source={require('../assets/iconoram.png')}
+            style={{width:75, height:75, top:-20}}
+        />
+    )
+}
