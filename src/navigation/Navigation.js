@@ -14,36 +14,30 @@ export default function Navigation() {
     const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
-    // screenOptions={({ route }) => ({
-    //     tabBarIcon: ({ focused, color, size }) => {
-    //       let iconName;
+    screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-    //       if (route.name === 'Account') {
-    //         iconName = focused
-    //           ? 'person-outline'
-    //           : 'person-outline';
-    //       } else if (route.name === 'Favoritos') {
-    //         iconName = focused ? 'heart-outline' : 'heart-outline';
-    //       }
+          if (route.name === 'Account') {
+            iconName = focused
+              ? 'user-alt'
+              : 'user-alt';
+          } else if (route.name === 'Favoritos') {
+            iconName = focused ? 'star' : 'star';
+          }
 
           
-    //       return <Ionicons name={iconName} size={size} color={color} />;
-    //     },
-    //   })}
-    //   tabBarOptions={{
-    //     activeTintColor: 'tomato',
-    //     inactiveTintColor: 'black',
-    //   }}
+          return <FontAwesome5 name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#004DDC',
+        inactiveTintColor: 'black',
+      }}
     >
         <Tab.Screen 
             name='Account' 
             component={NavigationAccount}
-            options={{
-                tabBarLabel:"Mi cuenta",
-                tabBarIcon:({color,size})=>{
-                    <FontAwesome5 name="user-alt" size={size} color={color} />
-                }
-            }}
         />
         <Tab.Screen 
             name='Rickandmorty' 

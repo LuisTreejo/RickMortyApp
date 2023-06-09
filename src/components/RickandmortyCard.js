@@ -39,9 +39,9 @@ const styles=StyleSheet.create({
   marginCard:{
     flex:1,
     padding:5,
-    backgroundColor:'white',
+    backgroundColor:'#000',
     borderRadius:10,
-    shadowColor:'#000',
+    shadowColor:'#fff',
     shadowOpacity:0.3,
     shadowRadius:4,
     elevation:5
@@ -53,7 +53,7 @@ const styles=StyleSheet.create({
     backgroundColor:'#BE81F'
   },
   name:{
-    color:'#000',
+    color:'#fff',
     fontWeight:'bold',
     fontSize:14
   },
@@ -72,7 +72,7 @@ const styles=StyleSheet.create({
   number:{
     position:'absolute',
     right:10,
-    color:'#000',
+    color:'#fff',
     fontSize:11
   }
 })
