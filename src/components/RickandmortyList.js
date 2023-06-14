@@ -1,13 +1,18 @@
-import { View, Text, SafeAreaView, FlatList, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, StyleSheet, ActivityIndicator } from 'react-native'
 import React from 'react'
 import RickandmortyCard from './RickandmortyCard'
 
 
 export default function RickandmortyList(props) {
     const {characters} = props
-
-
-    
+    const {nextUrl} = props
+    const {loadMoreData} =props
+   
+    const loadMore=()=>{
+        console.log('Cargando personajes')
+        loadMoreData()
+    }
+ 
   return (
     <SafeAreaView style={styles.list}>
         <FlatList 
@@ -17,6 +22,11 @@ export default function RickandmortyList(props) {
             keyExtractor={(characters)=>String(characters.id)}
             renderItem={({item})=><RickandmortyCard characters={item}/>}
             contentContainerStyle={styles.container}
+            onEndReachedThreshold={0.1}
+            onEndReached={nextUrl&&loadMore}
+            ListFooterComponent={
+               nextUrl && <ActivityIndicator size="large" color="#A4A4A4"/>
+            }
         />
     </SafeAreaView>
   )

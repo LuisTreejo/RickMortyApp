@@ -1,12 +1,25 @@
 import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 
 export default function RickandmortyCard(props) {
     const {characters} = props
-
+    const navigation = useNavigation()
     
 
     const goToPersonaje = ()=>{
+        navigation.navigate('Rickandmorty',{
+          id: characters.id, 
+          name:characters.name, 
+          image:characters.image, 
+          status:characters.status,
+          gender:characters.gender,
+          species:characters.species,
+          type:characters.type,
+          origin:characters.origin.name,
+          location:characters.location.name
+        })
+
         console.log(`Conoce mas del personaje: '${characters.name}'`)
     }
 

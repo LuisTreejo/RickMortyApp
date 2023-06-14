@@ -8,6 +8,7 @@ import Favoritos from '../screen/Favoritos'
 import Rickandmorty from '../screen/Rickandmorty'
 import NavigationAccount from './NavigationAccount';
 import NavigationFavoritos from './NavigationFavoritos';
+import NavigationRickandMorty from './NavigationRickandMorty';
 
 
 export default function Navigation() {
@@ -40,11 +41,12 @@ export default function Navigation() {
             component={NavigationAccount}
         />
         <Tab.Screen 
-            name='Rickandmorty' 
-            component={Rickandmorty}
+            name='RickandMorty' 
+            component={NavigationRickandMorty}
             options={{
                 tabBarLabel:"",
-                tabBarIcon: () => renderIconRM()
+                tabBarIcon: () => renderIconRM(),
+                
             }}
         />
         <Tab.Screen 
