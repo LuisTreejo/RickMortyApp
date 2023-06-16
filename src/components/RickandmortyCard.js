@@ -52,7 +52,7 @@ const styles=StyleSheet.create({
   marginCard:{
     flex:1,
     padding:5,
-    backgroundColor:'#000',
+    backgroundColor:'gray',
     borderRadius:10,
     shadowColor:'#fff',
     shadowOpacity:0.3,

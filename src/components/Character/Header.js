@@ -15,9 +15,10 @@ export default function Imagen({id,nom,img,stat}) {
     
   return (
     <View style={styles.headerContent}>
+      <Text style={styles.idText}>ID: #{id} </Text>
       <Image style={[styles.image,{borderColor:statusColor(stat)}]} source={{uri: img}}/>
       <Text style={[styles.textStatus,{backgroundColor:statusColor(stat)}]}>{stat}</Text>
-      <Text style={styles.textName}><Text style={styles.idText}>ID: #{id} </Text> {nom}</Text>
+      <Text style={styles.textName}> {nom}</Text>
     </View>
   )
 }
@@ -35,7 +36,7 @@ const styles=StyleSheet.create({
     image:{
         width:200,
         height:200,
-        borderRadius:100,
+        borderRadius:50,
         borderColor:'#000',
         alignSelf:'center',
         borderWidth:5
@@ -49,7 +50,8 @@ const styles=StyleSheet.create({
         borderRadius:5
     },
     idText:{
-      fontSize:12,
-      color:'gray',
+      fontSize:24,
+      color:'black',
+      textAlign:'center'
     }  
 })

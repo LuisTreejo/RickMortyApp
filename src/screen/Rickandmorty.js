@@ -22,7 +22,7 @@ export default function Rickandmorty(props) {
         
         <Header id={id} img={img} nom={nom} stat={stat}/>
           <View style={styles.infoContainer}>
-            <Properties gen={gen} spe={spe} ori={ori} loc={loc}/>
+            <Properties gen={gen} spe={spe} ori={ori} loc={loc} typ={typ}/>
           </View>
     </SafeAreaView>
   )
@@ -40,7 +40,8 @@ const styles=StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#EEE9E8'
+    backgroundColor:'#EEE9E8',
+    paddingTop: Platform.OS === 'android' ? 30 : 0
   },
   infoContainer: {
     flex: 1,

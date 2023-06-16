@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
 import React from 'react'
 
 export default function Properties({gen, spe, typ, ori, loc}) {
   return (
+    <SafeAreaView style={styles.proper}>
     <View style={styles.infoContainer}>
       <Text style={styles.propTitle}>---- Informacion del personaje ----</Text>
       <View style={styles.infoView}><Text style={styles.infoText}>Genero: </Text><Text style={styles.infoCharacter}>{gen}</Text></View>
@@ -10,6 +11,7 @@ export default function Properties({gen, spe, typ, ori, loc}) {
       <View style={styles.infoView}><Text style={styles.infoText}>Origen: </Text><Text style={styles.infoCharacter}>{ori}</Text></View>
       <View style={styles.infoView}><Text style={styles.infoText}>Ubicacion: </Text><Text style={styles.infoCharacter}>{loc}</Text></View>      
     </View>
+    </SafeAreaView>
   )
 }
 
@@ -33,7 +35,6 @@ const styles=StyleSheet.create({
   infoText:{
     fontWeight:'bold',
     fontSize:18,
-    backgroundColor:"#C2BEBD",
     borderRadius:8,
     textAlign:'center',
     padding:2,
@@ -47,5 +48,8 @@ const styles=StyleSheet.create({
     textAlign:'center',
     padding:2,
     width:240,
-  }
+  },
+  proper:{
+    paddingTop: Platform.OS === 'android' ? 30 : 0
+}
 })
