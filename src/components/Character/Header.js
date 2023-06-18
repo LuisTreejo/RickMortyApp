@@ -31,13 +31,14 @@ const styles=StyleSheet.create({
     textName:{
         textAlign:'center',
         fontSize:32,
-        fontWeight:'bold'
+        fontWeight:'bold',
+        color:'#A7CB54'
     },
     image:{
         width:200,
         height:200,
         borderRadius:50,
-        borderColor:'#000',
+        borderColor:'#A7CB54',
         alignSelf:'center',
         borderWidth:5
       },
@@ -51,7 +52,7 @@ const styles=StyleSheet.create({
     },
     idText:{
       fontSize:24,
-      color:'black',
+      color:'#A7CB54',
       textAlign:'center'
     }  
 })

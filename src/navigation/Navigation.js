@@ -32,7 +32,7 @@ export default function Navigation() {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#004DDC',
+        activeTintColor: '#A7CB54',
         inactiveTintColor: 'black',
       }}
     >
@@ -61,7 +61,7 @@ const renderIconRM=()=>{
     return(
         <Image
             source={require('../assets/iconoram.png')}
-            style={{width:75, height:75, top:-20}}
+            style={{width:75, height:75, top:-10}}
         />
     )
 }

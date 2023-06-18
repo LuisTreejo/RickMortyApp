@@ -52,12 +52,12 @@ const styles=StyleSheet.create({
   marginCard:{
     flex:1,
     padding:5,
-    backgroundColor:'gray',
+    backgroundColor:'#5CAD4A',
     borderRadius:10,
-    shadowColor:'#fff',
+    shadowColor:'#A7CB54',
     shadowOpacity:0.3,
     shadowRadius:4,
-    elevation:5
+    elevation:14
   },
   colorCard:{
     flex:1,
@@ -75,17 +75,16 @@ const styles=StyleSheet.create({
   },
   image:{
     position:'absolute',
-    bottom:2,
     right:2,
-    width:75,
-    height:75,
-    bottom:10,
+    width:85,
+    height:85,
+    bottom:1,
     borderRadius:10
   },
   number:{
     position:'absolute',
     right:10,
     color:'#fff',
-    fontSize:11
+    fontSize:15
   }
 })

@@ -37,10 +37,9 @@ const styles=StyleSheet.create({
   
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor:'#EEE9E8',
+    backgroundColor:'#0D0D0D',
     paddingTop: Platform.OS === 'android' ? 30 : 0
   },
   infoContainer: {

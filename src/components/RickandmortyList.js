@@ -25,7 +25,7 @@ export default function RickandmortyList(props) {
             onEndReachedThreshold={0.1}
             onEndReached={nextUrl&&loadMore}
             ListFooterComponent={
-               nextUrl && <ActivityIndicator size="large" color="#A4A4A4"/>
+               nextUrl && <ActivityIndicator size="large" color="#A7CB54"/>
             }
         />
     </SafeAreaView>
@@ -34,9 +34,10 @@ export default function RickandmortyList(props) {
 
 const styles = StyleSheet.create({
     container:{
-        paddingHorizontal:15
+        paddingHorizontal:2
     },
     list:{
-        paddingTop: Platform.OS === 'android' ? 30 : 0
+        paddingTop: Platform.OS === 'android' ? 30 : 0,
+        backgroundColor:'#0D0D0D'
     }
 })
