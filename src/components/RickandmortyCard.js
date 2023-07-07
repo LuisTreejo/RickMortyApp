@@ -1,11 +1,10 @@
-import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import { View, Text, Image, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import React,{useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
-
+import { AntDesign } from '@expo/vector-icons'
 export default function RickandmortyCard(props) {
     const {characters} = props
     const navigation = useNavigation()
-    
 
     const goToPersonaje = ()=>{
         navigation.navigate('Rickandmorty',{
@@ -17,7 +16,8 @@ export default function RickandmortyCard(props) {
           species:characters.species,
           type:characters.type,
           origin:characters.origin.name,
-          location:characters.location.name
+          location:characters.location.name,
+          episode:characters.episode
         })
 
         console.log(`Conoce mas del personaje: '${characters.name}'`)
@@ -26,16 +26,19 @@ export default function RickandmortyCard(props) {
   return (
     <TouchableWithoutFeedback onPress={goToPersonaje}>
         <View style={styles.card}>
-            <View style={styles.marginCard}>
-                <View style={styles.colorCard}>
-                    <Text style={styles.number}>#{`${characters.id}`.padStart(3, 0)}</Text>
-                      <View style={styles.containerText}>
-                          <Text style={styles.name} numberOfLines={3}>{characters.name}</Text>
-                      </View>
 
-                      <Image source={{uri: characters.image}} style={styles.image}/>
-                </View>
+
+          
+            <Image source={{uri: characters.image}} style={styles.image}/>
+                {/* <TouchableOpacity onPressIn={selectFav} onPressOut={unselectFav}>
+                  <AntDesign name="heart" size={35} color={colorFav} style={styles.iconHeart}/>
+                </TouchableOpacity> */}
+
+            <View style={styles.marginCard}>
+              <Text style={styles.number}>#{`${characters.id}`.padStart(3, 0)}</Text>
+              <Text style={styles.name} numberOfLines={3}>{characters.name}</Text> 
             </View>
+
         </View>
     </TouchableWithoutFeedback>
   )
@@ -45,46 +48,37 @@ const styles=StyleSheet.create({
 
   card:{
     flexGrow:1,
-    padding:16,
-    height:130,
-    padding:5
+    height:200,
+    padding:5,
+    width:100,
   },
   marginCard:{
-    flex:1,
-    padding:5,
+    padding:1,
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
     backgroundColor:'#5CAD4A',
-    borderRadius:10,
-    shadowColor:'#A7CB54',
-    shadowOpacity:0.3,
-    shadowRadius:4,
-    elevation:14
+    justifyContent:'center',
+    alignItems:'center',
+    height:65
   },
-  colorCard:{
-    flex:1,
-    padding:5,
-    borderRadius:10,
-    backgroundColor:'#BE81F'
-  },
+
   name:{
     color:'#fff',
     fontWeight:'bold',
-    fontSize:14
-  },
-  containerText:{
-    width:90
+    fontSize:19,
+    textAlign:'center',
   },
   image:{
-    position:'absolute',
-    right:2,
-    width:85,
-    height:85,
-    bottom:1,
-    borderRadius:10
+    alignSelf:'center',
+    width:'100%',
+    height:130,
   },
   number:{
-    position:'absolute',
-    right:10,
     color:'#fff',
-    fontSize:15
+    fontSize:14,
+  },
+  iconHeart:{
+    bottom:28,
+    left:150
   }
 })

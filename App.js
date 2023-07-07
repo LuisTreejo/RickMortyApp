@@ -3,12 +3,14 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import Navigation from './src/navigation/Navigation';
-Navigation
+import { AuthProvider } from './src/Context/AuthContext'
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Navigation/>
+      <AuthProvider>
+        <Navigation/>
+      </AuthProvider>
     </NavigationContainer>
   );
 }

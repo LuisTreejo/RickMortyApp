@@ -5,8 +5,11 @@ import RickandmortyApi from '../api/RickandmortyApi';
 import Rickandmorty from '../screen/Rickandmorty';
 
 
+
 export default function NavigationRickandMorty() {
+  
     const Stack = createStackNavigator();
+    
   return (
     <Stack.Navigator>
         <Stack.Screen
@@ -18,7 +21,7 @@ export default function NavigationRickandMorty() {
         }}
         />
 
-        <Stack.Screen name='Rickandmorty' component={Rickandmorty}/>
+        <Stack.Screen name='Rickandmorty' component={Rickandmorty} options={{headerStyle:{backgroundColor:'#A7CB54'}}}/>
     </Stack.Navigator>
   )
 }

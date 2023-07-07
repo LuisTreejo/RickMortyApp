@@ -1,49 +1,53 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Button, SafeAreaView } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import {FontAwesome,FontAwesome5,AntDesign,Ionicons, Entypo} from '@expo/vector-icons'; 
+import useAuth from '../../hooks/useAuth';
+import { ItemMenu } from '../../screen/Account';
+import { getFavoriteApi } from '../../api/favorito';
 
-export default function UserData(props) {
-  const {navigation, route:{params}}=props
+export default function UserData() {
+  
+  const {auth, logout}=useAuth()
+
+  const [cantidad,setCantidad]=useState(0)
+
+  useEffect(()=>{
+    if(auth){
+      const misfavs= async ()=>{
+        const response = await getFavoriteApi()
+        setCantidad(response.length)
+       }
+       misfavs();
+    }
+    
+  },[])
+
+ 
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
+
       <View style={styles.top}>
-        
-        <Text style={styles.textName}>{params.nombre} {params.apellido}</Text>
+        <Ionicons name="person-circle" size={170} color='#A7CB54'/>
+        <Text style={styles.textName}>{auth.firstName} {auth.lastName}</Text>
       </View>
 
-      <View style={styles.bottom}>
-        <View  style={{top:-100,alignItems:'center',justifyContent:'center',}}>
-            <Ionicons name="person-circle" size={200} color='#A7CB54' />
-
-            <TouchableOpacity>
-            <Text style={{bottom:10}}>Seleccionar una imagen</Text>
-            </TouchableOpacity>
-        </View>
         
         <View style={styles.bottomInfo}>
 
-          <View style={styles.textView}>
-            
-              <Entypo name='email' size={30} color='#A7CB54'/> 
-              <Text style={styles.infoUser}>{params.nomUsu}</Text>
-            
-          </View>
+          <ItemMenu title='Nombre: ' text={`${auth.firstName} ${auth.lastName}`}/>
+          <ItemMenu title='Usuario: ' text={auth.username}/>
+          <ItemMenu title='Email: ' text={auth.email}/>
+          <ItemMenu title='Total de favoritos: ' text={`${cantidad} personajes`}/>
 
-          <View style={styles.textView}>
-            
-              <Entypo name='mail' size={30} color='#A7CB54'/> 
-              <Text style={styles.infoUser}>{params.correo}</Text>
-            
-          </View>
-
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Editar perfil</Text>
-          </TouchableOpacity>
-
+          <TouchableOpacity style={styles.button} onPress={logout}>
+            <Text style={styles.buttonText}>Cerrar sesion</Text>
+        </TouchableOpacity>
         </View>
 
-      </View>
-    </View>
+      
+    </SafeAreaView>
   )
 }
 
@@ -52,34 +56,30 @@ const styles = StyleSheet.create({
   container:{
     flex:1,
     height:'100%',
-    backgroundColor:'#0D0D0D'
+    backgroundColor:'#0D0D0D',
   },
   top:{
-    backgroundColor:"#0D0D0D",
-    height: '30%',
+    backgroundColor:"#5CAD4A",
+    height:'33%', 
     justifyContent:'center',
     alignItems:'center',
-  },
-  bottom:{
-    backgroundColor:'#F0F2EB',
-    height:'70%',
-    borderTopRightRadius:100,
-    borderTopLeftRadius:100,
+    borderBottomEndRadius:20,
+    borderBottomStartRadius:20,
+    flexDirection:'row',
   },
   bottomInfo:{
     justifyContent:'center',
     alignItems:'center',
     margin:20,
-    bottom:30
   },
-  textView:{
-    flexDirection:'row',
-  },
+
   textName:{
-    color:'#5CAD4A',
+    color:'#000',
     fontSize:36,
     bottom:40,
-    fontWeight:'bold'
+    fontWeight:'bold',
+    textAlign:'center',
+    top:5
   },
   button:{
     width:225,
@@ -107,4 +107,5 @@ const styles = StyleSheet.create({
     padding:2,
     width:240,
   },
+  
 })

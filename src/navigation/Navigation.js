@@ -33,7 +33,9 @@ export default function Navigation() {
       })}
       tabBarOptions={{
         activeTintColor: '#A7CB54',
-        inactiveTintColor: 'black',
+        inactiveTintColor: 'white',
+        keyboardHidesTabBar:true,
+        tabStyle:{backgroundColor:'#0D0D0D'}
       }}
     >
         <Tab.Screen 
@@ -61,7 +63,7 @@ const renderIconRM=()=>{
     return(
         <Image
             source={require('../assets/iconoram.png')}
-            style={{width:75, height:75, top:-10}}
+            style={{width:65, height:65,}}
         />
     )
 }

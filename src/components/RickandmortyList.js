@@ -7,10 +7,10 @@ export default function RickandmortyList(props) {
     const {characters} = props
     const {nextUrl} = props
     const {loadMoreData} =props
-   
+    
     const loadMore=()=>{
         console.log('Cargando personajes')
-        loadMoreData()
+        loadMoreData()      
     }
  
   return (
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:2
     },
     list:{
-        paddingTop: Platform.OS === 'android' ? 30 : 0,
-        backgroundColor:'#0D0D0D'
+        backgroundColor:'#0D0D0D',
+        paddingTop: Platform.OS === 'android' ? 30 : 0
     }
 })

@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, Image, StyleSheet, ScrollView } from 'react-native'
 import React from 'react'
 import RickandmortyList from '../components/RickandmortyList'
 import RickandmortyApi from '../api/RickandmortyApi'
@@ -8,6 +8,7 @@ import Properties from '../components/Character/Properties'
 
 export default function Rickandmorty(props) {
   const {navigation, route:{params}}=props
+  
   const id=params.id
   const img=params.image
   const nom=params.name
@@ -17,34 +18,37 @@ export default function Rickandmorty(props) {
   const typ=params.type
   const ori=params.origin
   const loc=params.location 
+  const epi=params.episode
+
+
   return (
+    
     <SafeAreaView style={styles.container}>
-        
-        <Header id={id} img={img} nom={nom} stat={stat}/>
-          <View style={styles.infoContainer}>
-            <Properties gen={gen} spe={spe} ori={ori} loc={loc} typ={typ}/>
-          </View>
+
+      <View style={styles.headerView}>
+          <Header id={id} img={img} nom={nom} stat={stat}/>
+      </View>
+
+      
+          <ScrollView style={styles.propertiesView} nestedScrollEnabled={true}>
+            <Properties gen={gen} spe={spe} ori={ori} loc={loc} typ={typ} epi={epi}/>
+          </ScrollView>
+
     </SafeAreaView>
   )
 }
 
 const styles=StyleSheet.create({
-  safe:{
-    
-    justifyContent: 'center'
 
-  },
-  
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor:'#0D0D0D',
-    paddingTop: Platform.OS === 'android' ? 30 : 0
   },
-  infoContainer: {
+  headerView:{
+    height:'50%',
+  },
+  propertiesView: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    height:'50%',
   },
 })
