@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Button, SafeAreaView } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import {FontAwesome,FontAwesome5,AntDesign,Ionicons, Entypo} from '@expo/vector-icons'; 
+import { useFocusEffect } from '@react-navigation/native';
 import useAuth from '../../hooks/useAuth';
 import { ItemMenu } from '../../screen/Account';
 import { getFavoriteApi } from '../../api/favorito';
@@ -11,18 +12,15 @@ export default function UserData() {
 
   const [cantidad,setCantidad]=useState(0)
 
-  useEffect(()=>{
-    if(auth){
-      const misfavs= async ()=>{
-        const response = await getFavoriteApi()
-        setCantidad(response.length)
-       }
-       misfavs();
-    }
-    
-  },[])
-
- 
+  useFocusEffect(
+    useCallback(()=>{
+        const misfavs= async ()=>{
+          const response = await getFavoriteApi()
+          setCantidad(response.length)
+         }
+         misfavs();
+    })
+  );
 
   return (
     <SafeAreaView style={styles.container}>

@@ -9,8 +9,6 @@ import AvisoLogin from '../components/AvisoLogin'
 
 export default function Favoritos() {
 
-  const [refreshing, setRefreshing] = React.useState(false);
-
   const {auth} =useAuth()
 
   const apiUrl = 'https://rickandmortyapi.com/api/character/'
@@ -18,48 +16,31 @@ export default function Favoritos() {
   const [lista,setLista]=useState([])
   const [dataCharacter, setDataCharacter] = useState([])
 
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    fetchDataFavorites()
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, [dataCharacter]);
-
-  const fetchDataFavorites = async () =>{
-    try{
-      const res=[]
-      for(let i=0;i<lista.length;i++){
-        const response = await axios.get(apiUrl + lista[i]);
-            res.push(response.data)    
-               
-      }
-      setDataCharacter(res)
-             
-  }catch(error){
-      console.log(error)
-  }
-}
-    useEffect(()=>{
-      if(auth){
-        
-        const checkFavorito = async()=>{
-          const response = await getFavoriteApi()
-          console.log(response)
-          setLista(response)
-        }
-
-        
-
-      
-        checkFavorito()
-        fetchDataFavorites()
-    }
-  }, [auth])
-  
   
 
+useFocusEffect(
+    useCallback(()=>{          
 
+          const loadList=async()=>{
+            const response = await getFavoriteApi()
+            setLista(response)
+            try{
+              const res=[]
+              for(let i=0;i<lista.length;i++){
+                const response = await axios.get(apiUrl + lista[i]);
+                    res.push(response.data)    
+                       
+              }
+              setDataCharacter(res)
+                     
+          }catch(error){
+              console.log("Error en fetch favoritos",error)
+          }
+          }
+          
+          loadList();     
+  })
+)
 
   if(auth){
   return (
@@ -77,11 +58,15 @@ export default function Favoritos() {
               <Text key={item} style={styles.idFavs}>ID: {item} </Text>
           ))
           } */}
-          <ScrollView style={{flex:1}} refreshControl={
+          {/* <ScrollView style={{flex:1}} refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
             <FavoritosList dataCharacter={dataCharacter}/>
-          </ScrollView>
+          </ScrollView> */}
+
+          <View style={{flex:1}}>
+            <FavoritosList dataCharacter={dataCharacter}/>
+          </View>
 
           
         
