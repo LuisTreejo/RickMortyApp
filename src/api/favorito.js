@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
+import axios from 'axios'
 import {includes, pull} from 'lodash'
 import { FAVORITE_STORAGE } from "../utils/constants";
 
@@ -58,3 +59,14 @@ export const isFavoriteApi = async (id) =>{
         return false
     }
 }
+
+export const fetchDataFavorites = async (favoritos) =>{
+    const apiUrl = 'https://rickandmortyapi.com/api/character/'+favoritos
+    try{
+        const response = await axios.get(apiUrl);
+        
+        return response.data
+      }catch(error){
+        console.log(error)
+      }
+  }

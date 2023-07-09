@@ -4,8 +4,8 @@ import FavoritoCard from './FavoritoCard'
 
 export default function FavoritosList(props) {
 
-    const {dataCharacter, loadList} = props
- 
+    const {dataCharacter} = props
+    
   return (
     
     <SafeAreaView  style={{flex: 1, marginTop:5}}>
@@ -16,9 +16,7 @@ export default function FavoritosList(props) {
             keyExtractor={(dataCharacter)=>String(dataCharacter.id)}
             renderItem={({item})=><FavoritoCard dataCharacter={item}/>}
             contentContainerStyle={styles.container}
-            onEndReachedThreshold={0.1}
-            
-            
+            onEndReachedThreshold={0.1} 
         />
 
         {/* {

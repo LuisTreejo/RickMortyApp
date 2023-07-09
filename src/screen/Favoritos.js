@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Button, StyleSheet, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native'
 import React,{useState, useEffect, useCallback} from 'react'
-import { getFavoriteApi } from '../api/favorito'
+import { getFavoriteApi, fetchDataFavorites } from '../api/favorito'
 import useAuth from '../hooks/useAuth'
 import axios from 'axios'
 import FavoritosList from '../components/FavoritosList'
@@ -8,39 +8,27 @@ import {useFocusEffect} from '@react-navigation/native'
 import AvisoLogin from '../components/AvisoLogin'
 
 export default function Favoritos() {
-
   const {auth} =useAuth()
-
-  const apiUrl = 'https://rickandmortyapi.com/api/character/'
-
-  const [lista,setLista]=useState([])
-  const [dataCharacter, setDataCharacter] = useState([])
 
   
 
-useFocusEffect(
-    useCallback(()=>{          
+  // const [lista,setLista]=useState([])
+  const [dataCharacter, setDataCharacter] = useState([])
 
-          const loadList=async()=>{
-            const response = await getFavoriteApi()
-            setLista(response)
-            try{
-              const res=[]
-              for(let i=0;i<lista.length;i++){
-                const response = await axios.get(apiUrl + lista[i]);
-                    res.push(response.data)    
-                       
-              }
-              setDataCharacter(res)
-                     
-          }catch(error){
-              console.log("Error en fetch favoritos",error)
-          }
-          }
-          
-          loadList();     
-  })
-)
+  useFocusEffect(
+    useCallback(()=>{
+      const loadFavoritos = async()=>{
+
+          const favoritos = await getFavoriteApi();
+          const resultSet = await fetchDataFavorites(favoritos)
+          setDataCharacter(resultSet);
+      }
+      
+      loadFavoritos();
+
+    })
+  );
+
 
   if(auth){
   return (
@@ -58,18 +46,9 @@ useFocusEffect(
               <Text key={item} style={styles.idFavs}>ID: {item} </Text>
           ))
           } */}
-          {/* <ScrollView style={{flex:1}} refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }>
-            <FavoritosList dataCharacter={dataCharacter}/>
-          </ScrollView> */}
-
-          <View style={{flex:1}}>
+          <View style={styles.container2}>
             <FavoritosList dataCharacter={dataCharacter}/>
           </View>
-
-          
-        
     </SafeAreaView>
   ) 
 } else { 
@@ -99,8 +78,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color:'#5CAD4A'
   },
-
-
   idFavs:{
     color:'#fff',
     fontSize:24

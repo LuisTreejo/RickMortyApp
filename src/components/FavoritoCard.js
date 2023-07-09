@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 
 export default function FavoritoCard(props) {
     const {dataCharacter} = props
+    
     const stat = dataCharacter.status
     const navigation = useNavigation()
 
